@@ -154,7 +154,6 @@ class _LoginPageState extends State<LoginPage> {
       _isLogged = [];
     });
 
-    // Get values from text controllers
     String username = usernameController.text;
     String password = passwordController.text;
 
@@ -166,7 +165,6 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-    // Call the registerUser method from the controller
     List<String> loginResult = await widget._loginController.loginUser(
       username: username,
       password: password,
@@ -174,7 +172,6 @@ class _LoginPageState extends State<LoginPage> {
 
     print("EEEEEEE: ${loginResult}");
 
-    // Set _isRegistered to true upon successful registration
     setState(() {
       _isLoading = false;
       _isLogged = loginResult;

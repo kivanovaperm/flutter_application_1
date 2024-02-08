@@ -10,17 +10,15 @@ import 'package:flutter_application_1/api/api_connection.dart';
 class ExpenditureApi {
   // https://financialmanagementbackend-production.up.railway.app/
   final String baseUrl =
-      'https://financialmanagementbackend-production.up.railway.app'; // Замените на URL вашего API
+      'https://financialmanagementbackend-production.up.railway.app';
   // final String baseUrl =
-  //     'http://192.168.188.102:8000'; // Замените на URL вашего API
+  //     'http://192.168.188.102:8000';
 
   Future<dynamic> expenditureList(String accessToken) async {
     try {
-      final response = await http.get(
-          Uri.parse(
-              '$baseUrl/api/expenditure'), // Пример URL для запроса на вход
+      final response = await http.get(Uri.parse('$baseUrl/api/expenditure'),
           headers: <String, String>{
-            'Content-Type': 'application/json', // Пример заголовка
+            'Content-Type': 'application/json',
             'Authorization': "Bearer " + accessToken
           });
       if (response.statusCode == 200) {
@@ -28,7 +26,7 @@ class ExpenditureApi {
       } else if (response.statusCode == 401) {
         LoginApi loginApi = LoginApi();
         final newAccessToken =
-            await loginApi.refreshToken(); // Ваша функция обновления токена
+            await loginApi.refreshToken(); // функция обновления токена
         expenditureList(newAccessToken!);
       } else {
         return null;
@@ -40,11 +38,9 @@ class ExpenditureApi {
 
   Future<dynamic> expenditureDetailList(String accessToken, int id) async {
     try {
-      final response = await http.get(
-          Uri.parse(
-              '$baseUrl/api/expenditure/$id'), // Пример URL для запроса на вход
+      final response = await http.get(Uri.parse('$baseUrl/api/expenditure/$id'),
           headers: <String, String>{
-            'Content-Type': 'application/json', // Пример заголовка
+            'Content-Type': 'application/json',
             'Authorization': "Bearer " + accessToken
           });
       if (response.statusCode == 200) {
@@ -101,14 +97,12 @@ class ExpenditureApi {
           'category': updatedCategoryId,
           'expenditure_date': formattedDate,
           'expenditure_type': updatedExpanditureType
-          // ... другие поля, которые вы хотите обновить
         }),
       );
 
       if (response.statusCode == 200 || response.statusCode == 204) {
         isUpdated = true;
       } else {
-        // Обработка ошибок при обновлении
         isUpdated = false;
         print(
             'Error updating expenditure: ${json.decode(utf8.decode(response.bodyBytes))}');
@@ -141,8 +135,6 @@ class ExpenditureApi {
           'category': newCategoryId,
           'expenditure_type': newExpenditureType,
           'expenditure_date': newExpenditureDate,
-
-          // ... другие поля, которые вы хотите обновить
         }),
       );
 
@@ -163,8 +155,7 @@ class ExpenditureApi {
   Future<List<Map<String, dynamic>>?> getCategories(String accessToken) async {
     try {
       final response = await http.get(
-        Uri.parse(
-            '$baseUrl/api/categories'), // Пример URL для запроса категорий
+        Uri.parse('$baseUrl/api/categories'), //  URL для запроса категорий
         headers: <String, String>{
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $accessToken',

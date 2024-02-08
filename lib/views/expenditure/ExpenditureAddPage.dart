@@ -39,7 +39,6 @@ class _ExpenditureAddPageState extends State<ExpenditureAddPage> {
 
   void fetchCategories() async {
     try {
-      // Получение списка категорий из базы данных или другого источника
       List<RevenueCategory> categories =
           await _expenditureController.fetchCategories();
 
@@ -185,9 +184,7 @@ class _ExpenditureAddPageState extends State<ExpenditureAddPage> {
                       context,
                       MaterialPageRoute(builder: (_) => ExpenditureListPage()),
                     );
-                  } else {
-                    // Обработка неудачного обновления
-                  }
+                  } else {}
                 } catch (e) {
                   // Обработка ошибок при обновлении
                   print('Error updating revenue: $e');

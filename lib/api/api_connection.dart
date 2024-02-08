@@ -6,16 +6,16 @@ import 'package:flutter_application_1/services/secure_storage_manager.dart';
 
 class LoginApi {
   final String baseUrl =
-      'https://financialmanagementbackend-production.up.railway.app'; //
-  // final String baseUrl = 'http://192.168.188.102:8000'; //
+      'https://financialmanagementbackend-production.up.railway.app';
+  // final String baseUrl = 'http://192.168.188.102:8000';
 
   Future<Map<String, dynamic>?> login(String username, String password) async {
     try {
-      // Создание запроса на бэкенд, например, авторизации пользователя
+      // Создание запроса на  бэкенд, авторизация пользователя
       final response = await http.post(
-        Uri.parse('$baseUrl/api/auth/signin'), // Пример URL для запроса на вход
+        Uri.parse('$baseUrl/api/auth/signin'),
         headers: <String, String>{
-          'Content-Type': 'application/json', // Пример заголовка
+          'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, String>{
           'username': username,
@@ -32,8 +32,6 @@ class LoginApi {
         return json.decode(utf8.decode(response.bodyBytes));
       }
     } catch (e) {
-      // Обработка ошибок, если запрос не удался (например, сетевая ошибка)
-      // print('Error during login API request: $e');
       return {};
     }
   }
@@ -46,7 +44,7 @@ class LoginApi {
         final response = await http.post(
           Uri.parse('$baseUrl/api/auth/refresh'), // URL для обновления токена
           headers: <String, String>{
-            'Content-Type': 'application/json', // Пример заголовка
+            'Content-Type': 'application/json',
           },
           body: jsonEncode(<String, String>{
             'refresh': refreshToken,
@@ -74,7 +72,7 @@ class LoginApi {
       final response = await http.post(
         Uri.parse('$baseUrl/api/auth/signup'), // URL для обновления токена
         headers: <String, String>{
-          'Content-Type': 'application/json', // Пример заголовка
+          'Content-Type': 'application/json',
         },
         body: jsonEncode(<String, String>{
           "username": username,

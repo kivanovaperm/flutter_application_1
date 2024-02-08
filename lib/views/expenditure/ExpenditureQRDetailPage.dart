@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controllers/expenditure_controller.dart';
-import 'package:flutter_application_1/models/expenditure.dart';
-import 'package:flutter_application_1/views/expenditure/expenditureListPage.dart';
+import 'package:financial_management/controllers/expenditure_controller.dart';
+import 'package:financial_management/models/expenditure.dart';
+import 'package:financial_management/views/expenditure/expenditureListPage.dart';
 
 import '../../models/category.dart';
 import '../sidebar/SideBarPage.dart';
@@ -12,8 +12,7 @@ class ExpenditureQRDetailPage extends StatefulWidget {
   const ExpenditureQRDetailPage(this.url, {Key? key}) : super(key: key);
 
   @override
-  _ExpenditureQRDetailPageState createState() =>
-      _ExpenditureQRDetailPageState();
+  _ExpenditureQRDetailPageState createState() => _ExpenditureQRDetailPageState();
 }
 
 class _ExpenditureQRDetailPageState extends State<ExpenditureQRDetailPage> {
@@ -22,7 +21,7 @@ class _ExpenditureQRDetailPageState extends State<ExpenditureQRDetailPage> {
   final ExpenditureController _expenditureController = ExpenditureController();
   late Map<String, String> decodedData;
   late String date;
-  List<RevenueCategory> _categories = [];
+   List<RevenueCategory> _categories = [];
 
   String _selectedCategory = "";
   String _selectedExpenditureType = "КАРТА";
@@ -35,10 +34,11 @@ class _ExpenditureQRDetailPageState extends State<ExpenditureQRDetailPage> {
   @override
   void initState() {
     super.initState();
-    fetchCategories();
+     fetchCategories();
     decodedData = decodeUrl(widget.url);
     date = decodeDate(decodedData['t'] ?? '');
   }
+ 
 
   void fetchCategories() async {
     try {
@@ -58,14 +58,14 @@ class _ExpenditureQRDetailPageState extends State<ExpenditureQRDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Another Page')),
+      appBar: AppBar(title: const Text('Отсканированный чек')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(top: 20, bottom: 10, left: 15),
+              padding: EdgeInsets.only(top:20,bottom: 10, left: 15),
               child: Text(
                 "Дата: $date",
                 style: TextStyle(
@@ -73,9 +73,7 @@ class _ExpenditureQRDetailPageState extends State<ExpenditureQRDetailPage> {
                 ),
               ),
             ),
-            Divider(
-              thickness: 2.0,
-            ), // Add a divider between data elements
+             Divider(thickness: 2.0,), // Add a divider between data elements
             Padding(
               padding: EdgeInsets.all(10),
               child: Text(
@@ -85,102 +83,99 @@ class _ExpenditureQRDetailPageState extends State<ExpenditureQRDetailPage> {
                 ),
               ),
             ),
-            Divider(
-              thickness: 2.0,
-            ), // Add a divider between data elements
+            Divider(thickness: 2.0,), // Add a divider between data elements
             Padding(
-              padding: EdgeInsets.all(10),
-              child: DropdownButton<String>(
-                value: _selectedCategory,
-                isExpanded: true,
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                ),
-                hint: Container(
-                  child: Text("Выберите категорию"),
-                ),
-                items: _categories.map((category) {
-                  return DropdownMenuItem<String>(
-                    value: category.name,
-                    child: Text(
-                      category.name!,
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  for (var i = 0; i < _categories.length; i++) {
-                    if (_categories[i].name == newValue) {
-                      _selectedCategoryId = _categories[i].id!;
-                    }
+            padding: EdgeInsets.all(10),
+            child: DropdownButton<String>(
+              value: _selectedCategory,
+              isExpanded: true,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.black,
+              ),
+              hint: Container(
+                child: Text("Выберите категорию"),
+              ),
+              items: _categories.map((category) {
+                return DropdownMenuItem<String>(
+                  value: category.name,
+                  child: Text(
+                    category.name!,
+                    style: TextStyle(fontSize: 15),
+                  ),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                for (var i = 0; i < _categories.length; i++) {
+                  if (_categories[i].name == newValue) {
+                    _selectedCategoryId = _categories[i].id!;
                   }
-                  setState(() {
-                    _selectedCategory = newValue ?? "";
-                  });
-                },
-              ),
+                }
+                setState(() {
+                  _selectedCategory = newValue ?? "";
+                });
+              },
             ),
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: DropdownButton<String>(
-                value: _selectedExpenditureType,
-                isExpanded: true,
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                ),
-                hint: Container(
-                  child: Text("Выберите тип"),
-                ),
-                items: expenditureTypes.map((expenditureType) {
-                  return DropdownMenuItem<String>(
-                    value: expenditureType,
-                    child: Text(
-                      expenditureType,
-                      style: TextStyle(fontSize: 15),
-                    ),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _selectedExpenditureType = newValue!;
-                  });
-                },
+          ),
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: DropdownButton<String>(
+              value: _selectedExpenditureType,
+              isExpanded: true,
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.black,
               ),
+              hint: Container(
+                child: Text("Выберите тип"),
+              ),
+              items: expenditureTypes.map((expenditureType) {
+                return DropdownMenuItem<String>(
+                  value: expenditureType,
+                  child: Text(
+                    expenditureType,
+                    style: TextStyle(fontSize: 15),
+                  ),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedExpenditureType = newValue!;
+                });
+              },
             ),
+          ),
             Padding(
-              padding: EdgeInsets.only(top: 10, left: 100),
+              padding: EdgeInsets.only(top:10,left:100),
               child: OutlinedButton(
                 onPressed: () async {
                   try {
                     int selectedCategoryId = _categories
-                        .firstWhere(
-                            (category) => category.name == _selectedCategory)
+                        .firstWhere((category) =>
+                            category.name == _selectedCategory)
                         .id!;
                     double? updatedSum = double.tryParse(decodedData['s']!);
                     String expenditureType = _selectedExpenditureType;
                     String expenditureDate = date;
-                    final bool? isCreated =
-                        await _expenditureController.createExpenditure(
-                            updatedSum!,
-                            _selectedCategoryId,
-                            expenditureType,
-                            expenditureDate);
+                    final bool? isCreated = await _expenditureController.createExpenditure(
+                        updatedSum!,
+                        _selectedCategoryId,
+                        expenditureType,
+                        expenditureDate);
                     if (isCreated!) {
                       Navigator.pop(context);
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(
-                            builder: (_) => ExpenditureListPage()),
-                      );
-                    } else {
-                      // Обработка неудачного обновления
-                    }
-                  } catch (e) {
-                    // Обработка ошибок при обновлении
-                    print('Error updating revenue: $e');
+                        MaterialPageRoute(builder: (_) => ExpenditureListPage()),
+                    );
+                  } else {
+                    // Обработка неудачного обновления
                   }
+                } catch (e) {
+                  // Обработка ошибок при обновлении
+                  print('Error updating revenue: $e');
+                }
+                
                 },
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(color: Colors.black),

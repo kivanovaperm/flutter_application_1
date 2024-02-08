@@ -105,8 +105,15 @@ class _ReportExpenditureDetailPageState
                         padding: EdgeInsets.only(top: 20, left: 20),
                         child: Text(
                           'Категория: ${reportExpenditure.categoryName}\n'
+                          'Разница: ${double.parse(reportExpenditure.difference!)}\n'
                           'Итого: ${reportExpenditure.totalSum}',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(
+                            fontSize: 18,
+                            color:
+                                double.parse(reportExpenditure.difference!) < 0
+                                    ? Colors.red
+                                    : Colors.green,
+                          ),
                         ),
                       ),
                       Divider(

@@ -63,7 +63,6 @@ class _ExpenditureDetailState extends State<ExpenditureDetail> {
 
   void fetchCategories() async {
     try {
-      // Получение списка категорий из базы данных или другого источника
       List<RevenueCategory> categories =
           await _expenditureController.fetchCategories();
 
@@ -188,7 +187,7 @@ class _ExpenditureDetailState extends State<ExpenditureDetail> {
               onPressed: () async {
                 try {
                   // Получаем ID элемента, который нужно удалить
-                  int idToDelete = int.parse(_idcontroller.text); // ваш ID;
+                  int idToDelete = int.parse(_idcontroller.text); // ID;
                   // Вызываем метод удаления из контроллера
                   final bool isDeleted = await _expenditureController
                       .deleteExpenditure(idToDelete);
@@ -198,9 +197,7 @@ class _ExpenditureDetailState extends State<ExpenditureDetail> {
                       context,
                       MaterialPageRoute(builder: (_) => ExpenditureListPage()),
                     );
-                  } else {
-                    // Обработка неудачного удаления
-                  }
+                  } else {}
                 } catch (e) {
                   // Обработка ошибок удаления
                   print('Error deleting expenditure: $e');
@@ -242,9 +239,7 @@ class _ExpenditureDetailState extends State<ExpenditureDetail> {
                       context,
                       MaterialPageRoute(builder: (_) => ExpenditureListPage()),
                     );
-                  } else {
-                    // Обработка неудачного обновления
-                  }
+                  } else {}
                 } catch (e) {
                   // Обработка ошибок при обновлении
                   print('Error updating expenditure: $e');

@@ -1,12 +1,11 @@
 import 'package:flutter_application_1/api/api_connection.dart';
 import 'package:flutter_application_1/api/revenue_api.dart';
 import 'package:flutter_application_1/models/revenue.dart';
-import 'package:flutter_application_1/services/secure_storage_manager.dart'; // Путь к вашему файлу login_api.dart
-import 'package:flutter_application_1/models/category.dart'; // Путь к вашему файлу login_api.dart
+import 'package:flutter_application_1/services/secure_storage_manager.dart';
+import 'package:flutter_application_1/models/category.dart';
 
 class RevenueController {
-  final RevenueApi _revenueApi =
-      RevenueApi(); // Инициализация вашего API для входа
+  final RevenueApi _revenueApi = RevenueApi(); // Инициализация API для входа
 
   Future<List<Revenue>> fetchRevenues() async {
     List<Revenue> revenues = [];
@@ -98,7 +97,6 @@ class RevenueController {
 
   Future<List<RevenueCategory>> fetchCategories() async {
     try {
-      // Здесь вызываете метод или API для получения списка категорий
       SecureStorageManager secureStorageManager = SecureStorageManager();
       final accessToken = await secureStorageManager.getAccessToken();
       final categoriesData = await _revenueApi.getCategories(accessToken);

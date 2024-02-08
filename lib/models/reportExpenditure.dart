@@ -6,6 +6,7 @@ class ReportExpenditure {
   int? categoryId;
   String? categoryName;
   String? totalSum;
+  String? difference;
 
   ReportExpenditure();
 
@@ -13,6 +14,7 @@ class ReportExpenditure {
     ReportExpenditure reportExpenditure = ReportExpenditure();
     reportExpenditure.categoryId = json['category_id'];
     reportExpenditure.categoryName = (json['category_name']);
+    reportExpenditure.difference = (json['difference']);
     reportExpenditure.totalSum = (json['total_sum']);
     return reportExpenditure;
   }

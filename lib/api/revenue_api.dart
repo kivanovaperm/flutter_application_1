@@ -1,4 +1,4 @@
-import 'dart:convert'; // Если требуется для работы с JSON
+import 'dart:convert';
 
 import 'package:flutter_application_1/models/revenue.dart';
 import 'package:flutter_application_1/models/token.dart';
@@ -11,23 +11,21 @@ import 'package:flutter_application_1/api/api_connection.dart';
 class RevenueApi {
   // https://financialmanagementbackend-production.up.railway.app/
   final String baseUrl =
-      'https://financialmanagementbackend-production.up.railway.app'; // Замените на URL вашего API
-  // final String baseUrl = 'http://192.168.188.102:8000'; // Замените на URL вашего API
+      'https://financialmanagementbackend-production.up.railway.app';
+  // final String baseUrl = 'http://192.168.188.102:8000';
 
   Future<dynamic> revenueList(String accessToken) async {
     try {
-      final response = await http.get(
-          Uri.parse('$baseUrl/api/revenue'), // Пример URL для запроса на вход
+      final response = await http.get(Uri.parse('$baseUrl/api/revenue'),
           headers: <String, String>{
-            'Content-Type': 'application/json', // Пример заголовка
+            'Content-Type': 'application/json',
             'Authorization': "Bearer " + accessToken
           });
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else if (response.statusCode == 401) {
         LoginApi loginApi = LoginApi();
-        final newAccessToken =
-            await loginApi.refreshToken(); // Ваша функция обновления токена
+        final newAccessToken = await loginApi.refreshToken();
         revenueList(newAccessToken!);
       } else {
         return null;
@@ -39,11 +37,9 @@ class RevenueApi {
 
   Future<dynamic> revenueDetailList(String accessToken, int id) async {
     try {
-      final response = await http.get(
-          Uri.parse(
-              '$baseUrl/api/revenue/$id'), // Пример URL для запроса на вход
+      final response = await http.get(Uri.parse('$baseUrl/api/revenue/$id'),
           headers: <String, String>{
-            'Content-Type': 'application/json', // Пример заголовка
+            'Content-Type': 'application/json',
             'Authorization': "Bearer " + accessToken
           });
       if (response.statusCode == 200) {
@@ -112,8 +108,7 @@ class RevenueApi {
   Future<List<Map<String, dynamic>>?> getCategories(String accessToken) async {
     try {
       final response = await http.get(
-        Uri.parse(
-            '$baseUrl/api/categories'), // Пример URL для запроса категорий
+        Uri.parse('$baseUrl/api/categories'), // URL для запроса категорий
         headers: <String, String>{
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $accessToken',
@@ -153,7 +148,6 @@ class RevenueApi {
           'sum': newSum,
           'category': newCategoryId,
           'revenue_date': newRevenueDate,
-          // ... другие поля, которые вы хотите обновить
         }),
       );
 

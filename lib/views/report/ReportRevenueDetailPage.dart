@@ -99,8 +99,14 @@ class _ReportRevenueDetailPageState extends State<ReportRevenueDetailPage> {
                         padding: EdgeInsets.only(top: 20, left: 20),
                         child: Text(
                           'Категория: ${reportRevenue.categoryName}\n'
+                          'Разница: ${double.parse(reportRevenue.difference!)}\n'
                           'Итого: ${reportRevenue.totalSum}',
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: double.parse(reportRevenue.difference!) < 0
+                                ? Colors.red
+                                : Colors.green,
+                          ),
                         ),
                       ),
                       Divider(

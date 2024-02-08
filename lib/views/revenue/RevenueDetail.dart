@@ -58,7 +58,6 @@ class _RevenueDetailState extends State<RevenueDetail> {
 
   void fetchCategories() async {
     try {
-      // Получение списка категорий из базы данных или другого источника
       List<RevenueCategory> categories =
           await _revenueController.fetchCategories();
 
@@ -166,11 +165,8 @@ class _RevenueDetailState extends State<RevenueDetail> {
                       context,
                       MaterialPageRoute(builder: (_) => RevenuePage()),
                     );
-                  } else {
-                    // Обработка неудачного удаления
-                  }
+                  } else {}
                 } catch (e) {
-                  // Обработка ошибок удаления
                   print('Error deleting revenue: $e');
                 }
               },
@@ -205,11 +201,8 @@ class _RevenueDetailState extends State<RevenueDetail> {
                       context,
                       MaterialPageRoute(builder: (_) => RevenuePage()),
                     );
-                  } else {
-                    // Обработка неудачного обновления
-                  }
+                  } else {}
                 } catch (e) {
-                  // Обработка ошибок при обновлении
                   print('Error updating revenue: $e');
                 }
               },

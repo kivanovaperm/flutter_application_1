@@ -10,8 +10,8 @@ import 'package:flutter_application_1/api/api_connection.dart';
 class ExpenditureReportApi {
   // https://financialmanagementbackend-production.up.railway.app/
   final String baseUrl =
-      'https://financialmanagementbackend-production.up.railway.app'; // Замените на URL вашего API
-  // final String baseUrl = 'http://192.168.188.102:8000'; // Замените на URL вашего API
+      'https://financialmanagementbackend-production.up.railway.app';
+  // final String baseUrl = 'http://192.168.188.102:8000';
 
   Future<dynamic> expenditureList(
       String accessToken, String startDate, String endDate) async {
@@ -19,13 +19,12 @@ class ExpenditureReportApi {
       final response = await http.post(
         Uri.parse('$baseUrl/api/reports/expenditure'),
         headers: <String, String>{
-          'Content-Type': 'application/json', // Пример заголовка
+          'Content-Type': 'application/json',
           'Authorization': "Bearer " + accessToken
         },
         body: jsonEncode({
           'start_date': startDate,
           'end_date': endDate,
-          // ... другие поля, которые вы хотите обновить
         }),
       );
       if (response.statusCode == 200) {

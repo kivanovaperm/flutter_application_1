@@ -100,7 +100,6 @@ class ExpenditureController {
 
   Future<List<RevenueCategory>> fetchCategories() async {
     try {
-      // Здесь вызываете метод или API для получения списка категорий
       SecureStorageManager secureStorageManager = SecureStorageManager();
       final accessToken = await secureStorageManager.getAccessToken();
       final categoriesData = await _expenditureApi.getCategories(accessToken);

@@ -1,12 +1,15 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter_application_1/views/expenditure/expenditureListPage.dart';
+import 'package:financial_management/views/expenditure/expenditureListPage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import 'ExpenditureQRDetailPage.dart';
+
+
+
 
 class QRViewExample extends StatefulWidget {
   const QRViewExample({Key? key}) : super(key: key);
@@ -98,10 +101,10 @@ class _QRViewExampleState extends State<QRViewExample> {
                         child: ElevatedButton(
                           onPressed: () async {
                             Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => ExpenditureListPage(),
-                              ),
-                            );
+                                MaterialPageRoute(
+                                  builder: (context) => ExpenditureListPage(),
+                                ),
+                              );
                           },
                           child: const Text('Назад',
                               style: TextStyle(fontSize: 20)),
@@ -115,15 +118,14 @@ class _QRViewExampleState extends State<QRViewExample> {
                               // Перейти на другую страницу и передать ссылку как параметр
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      ExpenditureQRDetailPage(result!.code!),
+                                  builder: (context) => ExpenditureQRDetailPage(result!.code!),
                                 ),
                               );
                             }
                           },
                           child: const Text('Подтвердить'),
                         ),
-                      ),
+                      ), 
                     ],
                   ),
                 ],
